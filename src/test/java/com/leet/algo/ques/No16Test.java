@@ -27,8 +27,8 @@ public class No16Test {
     public void testThreeSumClosest() throws Exception {
 
         int[] nums = {-3, 2, 0, 9, 5, 1};
-        int res = no16.threeSumClosest(nums, 4);
-        Assert.assertEquals(2, res);
+        int res = no16.threeSumClosest(nums, 7);
+        Assert.assertEquals(7, res);
     }
 
 
