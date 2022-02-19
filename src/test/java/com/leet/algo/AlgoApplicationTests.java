@@ -19,9 +19,10 @@ public class AlgoApplicationTests {
 
     @Test
     public void contextLoads() {
-//        System.out.println(("111d0dc8-3901-11eb-a57e-1c34da501814".hashCode() & Integer.MAX_VALUE) % 128);
-        long index = (LocalDate.now().atStartOfDay().toEpochSecond(BJ_ZONE) / ONE_DAY_SECONDS) % INTERVAL_DAYS;
-        System.out.println(index);
+//        System.out.println(String.format("%xn",69331));
+        System.out.println(("804c13ac-d392-11e9-a0bf-6c92bf2cdd05".hashCode() & Integer.MAX_VALUE) % 128);
+//        long index = (LocalDate.now().atStartOfDay().toEpochSecond(BJ_ZONE) / ONE_DAY_SECONDS) % INTERVAL_DAYS;
+//        System.out.println(index);
     }
 
 }
