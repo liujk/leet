@@ -12,18 +12,17 @@ public class No76 {
     public String minWindow(String s, String t) {
         Map<Character, Integer> need = new HashMap<>();
         Map<Character, Integer> window = new HashMap<>();
-        int left = 0, right = 0, valid = 0, start = 0, len = Integer.MAX_VALUE;
-
-        for (Character c : t.toCharArray()) {
-            add(need, c);
+        for (int i = 0; i < t.length(); i++) {
+            need.put(t.charAt(i), need.getOrDefault(t.charAt(i), 0) + 1);
         }
-
+        int valid = 0, left = 0, right = 0;
+        int start = 0, len = Integer.MAX_VALUE;
         while (right < s.length()) {
-            char c = s.charAt(right);
+            char r = s.charAt(right);
             right++;
-            if (need.containsKey(c)) {
-                add(window, c);
-                if (need.get(c).equals(window.get(c))) {
+            if (need.containsKey(r)) {
+                window.put(r, window.getOrDefault(r, 0) + 1);
+                if (window.get(r).equals(need.get(r))) {
                     valid++;
                 }
             }
@@ -33,17 +32,17 @@ public class No76 {
                     start = left;
                     len = right - left;
                 }
-                char d = s.charAt(left);
+                char l = s.charAt(left);
                 left++;
-                if (need.containsKey(d)) {
-                    if (need.get(d).equals(window.get(d))) {
+                if (need.containsKey(l)) {
+                    if (window.get(l).equals(need.get(l))) {
                         valid--;
                     }
-                    subtract(window, d);
+                    window.put(l, window.getOrDefault(l, 0) - 1);
                 }
             }
         }
-        return len == Integer.MAX_VALUE ? "" : s.substring(start, len + start);
+        return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
     }
 
     private static void add(Map<Character, Integer> map, Character c) {
