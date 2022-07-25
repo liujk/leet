@@ -1,6 +1,8 @@
 package com.leet.algo.ques;
 
 import com.leet.algo.AlgoApplication;
+import com.leet.algo.tree.No297;
+import com.leet.algo.tree.No654;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,8 @@ public class No16Test {
     No28 no28;
     @Autowired
     No350 no350;
+    @Autowired
+    No297 no297;
 
     @Test
     public void testThreeSumClosest() throws Exception {
@@ -67,5 +71,12 @@ public class No16Test {
                 .divide(new BigDecimal(5), 0, RoundingMode.CEILING);
         System.out.println(magnification.toPlainString());
 
+    }
+
+    @Test
+    public void test297() throws Exception {
+        No297.TreeNode deserialize = no297.deserialize("1,2,#,#,3,4,#,#,5,#,#,");
+        String serialize = no297.serialize(deserialize);
+        System.out.println(serialize);
     }
 } 
