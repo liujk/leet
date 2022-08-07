@@ -1,5 +1,6 @@
 package com.leet.algo.tree;
 
+
 /**
  * @author jkliu
  * @description
@@ -7,7 +8,25 @@ package com.leet.algo.tree;
  **/
 public class No236 {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-return null;
+        if (root == p || root == q) {
+            return root;
+        }
+        return find(root, p.val, q.val);
+    }
+
+    private TreeNode find(TreeNode node, int p, int q) {
+        if (node == null) {
+            return null;
+        }
+        if (node.val == p || node.val == q) {
+            return node;
+        }
+        TreeNode left = find(node.left, p, q);
+        TreeNode right = find(node.right, p, q);
+        if (left != null && right != null) {
+            return node;
+        }
+        return left != null ? left : right;
     }
 
     public class TreeNode {

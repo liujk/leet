@@ -16,43 +16,36 @@ public class No438 {
     public static List<Integer> findAnagrams(String s, String p) {
         Map<Character, Integer> need = new HashMap<>();
         Map<Character, Integer> window = new HashMap<>();
-        for (Character c : p.toCharArray()) {
-            add(need, c);
+
+        for (int i = 0; i < p.length(); i++) {
+            need.put(p.charAt(i), need.getOrDefault(p.charAt(i), 0) + 1);
         }
         int left = 0, right = 0, valid = 0;
-        List<Integer> res = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         while (right < s.length()) {
-            char c = s.charAt(right);
+            char r = s.charAt(right);
             right++;
-            if (need.containsKey(c)) {
-                add(window, c);
-                if (need.get(c).equals(window.get(c))) {
+            if (need.containsKey(r)) {
+                window.put(r, window.getOrDefault(r, 0) + 1);
+                if (window.get(r) == need.get(r)) {
                     valid++;
                 }
             }
             while (right - left >= p.length()) {
-                if (need.size() == valid) {
-                    res.add(left);
+                if (valid == need.size()) {
+                    list.add(left);
                 }
-                char d = s.charAt(left);
+                char l = s.charAt(left);
                 left++;
-                if (need.containsKey(d)) {
-                    if (need.get(d).equals(window.get(d))) {
+                if (need.containsKey(l)) {
+                    if (window.get(l) == need.get(l)) {
                         valid--;
                     }
-                    subtract(window, d);
+                    window.put(l, window.get(l) - 1);
                 }
             }
         }
-        return res;
-    }
-
-    private static void add(Map<Character, Integer> map, Character c) {
-        map.put(c, map.getOrDefault(c, 0) + 1);
-    }
-
-    private static void subtract(Map<Character, Integer> map, Character c) {
-        map.put(c, map.getOrDefault(c, 0) - 1);
+        return list;
     }
 
     public static void main(String[] args) {

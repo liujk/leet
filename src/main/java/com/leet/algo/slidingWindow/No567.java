@@ -12,18 +12,17 @@ public class No567 {
     public boolean checkInclusion(String s1, String s2) {
         Map<Character, Integer> need = new HashMap<>();
         Map<Character, Integer> window = new HashMap<>();
-        for (Character c : s1.toCharArray()) {
-            add(need, c);
-        }
 
+        for (int i = 0; i < s1.length(); i++) {
+            need.put(s1.charAt(i), need.getOrDefault(s1.charAt(i), 0) + 1);
+        }
         int left = 0, right = 0, valid = 0;
-        char[] s2CharArray = s2.toCharArray();
-        while (right < s2CharArray.length) {
-            char c = s2CharArray[right];
+        while (right < s2.length()) {
+            char r = s2.charAt(right);
             right++;
-            if (need.containsKey(c)) {
-                add(window, c);
-                if (need.get(c).equals(window.get(c))) {
+            if (need.containsKey(r)) {
+                window.put(r, window.getOrDefault(r, 0) + 1);
+                if (window.get(r).equals(need.get(r))) {
                     valid++;
                 }
             }
@@ -31,24 +30,16 @@ public class No567 {
                 if (valid == need.size()) {
                     return true;
                 }
-                char d = s2CharArray[left];
+                char l = s2.charAt(left);
                 left++;
-                if (need.containsKey(d)) {
-                    if (need.get(c).equals(window.get(c))) {
+                if (need.containsKey(l)) {
+                    if (window.get(l).equals(need.get(l))) {
                         valid--;
                     }
-                    subtract(window, d);
+                    window.put(l, window.get(l) - 1);
                 }
             }
         }
         return false;
-    }
-
-    private void add(Map<Character, Integer> map, Character c) {
-        map.put(c, map.getOrDefault(c, 0) + 1);
-    }
-
-    private void subtract(Map<Character, Integer> map, Character c) {
-        map.put(c, map.getOrDefault(c, 0) - 1);
     }
 }

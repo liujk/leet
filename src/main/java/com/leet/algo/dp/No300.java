@@ -1,5 +1,6 @@
 package com.leet.algo.dp;
 
+
 import java.util.Arrays;
 
 /**
@@ -15,16 +16,20 @@ public class No300 {
             return nums.length;
         }
         int[] dp = new int[nums.length];
-        Arrays.fill(dp, 1);
-        int maxLen = 1;
+        for (int i = 0; i < nums.length; i++) {
+            dp[i] = 1;
+        }
         for (int i = 0; i < nums.length; i++) {
             for (int j = 0; j < i; j++) {
-                if (nums[j] < nums[i]) {
-                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                if (nums[i] > nums[j]) {
+                    dp[i] = Integer.max(dp[i], dp[j] + 1);
                 }
             }
-            maxLen = Math.max(maxLen, dp[i]);
         }
-        return maxLen;
+        int max = 1;
+        for (int i = 0; i < dp.length; i++) {
+            max = Integer.max(max, dp[i]);
+        }
+        return max;
     }
 }
