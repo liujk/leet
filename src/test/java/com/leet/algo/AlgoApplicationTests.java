@@ -1,5 +1,9 @@
 package com.leet.algo;
 
+import com.leet.common.GenXinEncryptUtil;
+import com.leet.common.PayEncryptUtil;
+import com.leet.common.SafeObjectMapper;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,11 +12,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,21 +37,19 @@ public class AlgoApplicationTests {
     }
 
     @Test
-    public void contextLoads() {
-        System.out.println(String.format("%x", 419));
+    public void contextLoads() throws Exception {
+//        System.out.println(System.currentTimeMillis());
+//        System.out.println(String.format("%x", 419));
 //        System.out.println(String.format("%xn",69331));
-        System.out.println("8ac683d66e8d0eef026e8e4888030044".hashCode() & 0x7F);
+        //重庆第一分正式 37
+//        System.out.println("111d0dc8-3901-11eb-a57e-1c34da501814".hashCode() & 0x7F);
+        //重庆第一分测试 127
+        System.out.println("402802ec7c747676017d1974898b495f".hashCode() & 0x7F);
 //        long index = (LocalDate.now().atStartOfDay().toEpochSecond(BJ_ZONE) / ONE_DAY_SECONDS) % INTERVAL_DAYS;
 //        System.out.println(index);
-
         String key = "yu23wp$@yh3416rf";
+//        String key = "Jbspn42dbelvngkn";
         AES aes = new AES(key);
-//        System.out.println(aes.decrypt("s/eTgIH+P1K/tJEgtAGVGA=="));
-        System.out.println(aes.encrypt("18100383675", key));
-//        System.out.println(aes.decrypt("s/eTgIH+P1K/tJEgtAGVGA=="));
-//
-//        String digest = MD5.getMessageDigest("bxChannel=" + bxChannel +
-//                "&timestamp=" + timestamp + "&sourceCode=" + sourceCode + "&identityNo=" + identityNo + md5Salt);
+        System.out.println("Basic " + new String(Base64.getEncoder().encode("ea3a38637653386f04ac15f5:1a26c61350d237e42872f14b".getBytes()), Charset.forName("utf-8")));
     }
-
 }

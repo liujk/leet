@@ -10,41 +10,45 @@ import org.springframework.stereotype.Component;
 @Component
 public class No82 {
 
-    public ListNode deleteDuplicates(ListNode head) {
+    public static ListNode deleteDuplicates(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
-        if (head.val == head.next.val && head.next.next == null) {
-            return null;
-        }
-        ListNode pre = new ListNode(-127, head);
-        ListNode prepre = new ListNode(-127, pre);
-        ListNode result = prepre;
+        ListNode pre = new ListNode(0);
+        ListNode res = pre;
+        ListNode temp = new ListNode(Integer.MIN_VALUE);
         ListNode cur = head;
-        boolean rep = false;
+        boolean fit = false;
         while (cur != null) {
-            if (pre.val == cur.val) {
-                rep = true;
-                cur = cur.next;
-                pre = pre.next;
-            } else if (!rep) {
-                prepre.next = pre;
-                prepre = prepre.next;
-                pre = pre.next;
-                cur = cur.next;
+            if (temp.val != cur.val) {
+                if (fit) {
+                    pre.next = temp;
+                    pre = pre.next;
+                    pre.next = null;
+                }
+                temp = cur;
+                fit = true;
             } else {
-                cur = cur.next;
-                pre = pre.next;
-                rep = false;
+                fit = false;
             }
+            cur = cur.next;
+        }
+        if (fit) {
+            pre.next = temp;
+        }
+        return res.next;
+    }
 
-        }
-        if (prepre.val == pre.val || rep) {
-            prepre.next = null;
-        } else {
-            prepre.next = pre;
-        }
-        return result.next.next;
+    public static void main(String[] args) {
+        ListNode five = new ListNode(5);
+        ListNode four2 = new ListNode(4, five);
+        ListNode four1 = new ListNode(4, four2);
+        ListNode three2 = new ListNode(3, four1);
+        ListNode three1 = new ListNode(3, three2);
+        ListNode two = new ListNode(2, three1);
+        ListNode head = new ListNode(1, two);
+        ListNode listNode = deleteDuplicates(head);
+        int a = listNode.val;
     }
 
     public static class ListNode {
