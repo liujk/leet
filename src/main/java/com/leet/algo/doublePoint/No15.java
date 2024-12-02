@@ -1,4 +1,4 @@
-package com.leet.algo.ques;
+package com.leet.algo.doublePoint;
 
 import java.util.ArrayList;
 import java.util.Arrays;

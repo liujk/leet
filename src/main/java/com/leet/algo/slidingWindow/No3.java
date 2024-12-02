@@ -11,21 +11,20 @@ import java.util.Map;
 public class No3 {
     public int lengthOfLongestSubstring(String s) {
         Map<Character, Integer> window = new HashMap<>();
-
         int left = 0, right = 0, maxLen = 0;
-        char[] array = s.toCharArray();
-
         while (right < s.length()) {
-            char rightChar = array[right];
+            char r = s.charAt(right);
             right++;
-            window.put(rightChar, window.getOrDefault(rightChar, 0) + 1);
+            window.put(r, window.getOrDefault(r, 0) + 1);
 
-            while (window.get(rightChar) > 1) {
-                char leftChar = array[left];
+            while (window.get(r) > 1) {
+                char l = s.charAt(left);
                 left++;
-                window.put(leftChar, window.get(leftChar) - 1);
+                window.put(l, window.getOrDefault(l, 0) - 1);
+                if (window.get(r) == 1) {
+                    maxLen = Integer.max(maxLen, right - left);
+                }
             }
-            maxLen = Integer.max(maxLen, right - left);
         }
         return maxLen;
     }

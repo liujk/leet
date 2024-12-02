@@ -12,7 +12,6 @@ public class No567 {
     public boolean checkInclusion(String s1, String s2) {
         Map<Character, Integer> need = new HashMap<>();
         Map<Character, Integer> window = new HashMap<>();
-
         for (int i = 0; i < s1.length(); i++) {
             need.put(s1.charAt(i), need.getOrDefault(s1.charAt(i), 0) + 1);
         }
@@ -26,7 +25,7 @@ public class No567 {
                     valid++;
                 }
             }
-            while (right - left >= s1.length()) {
+            if (right - left >= s1.length()) {
                 if (valid == need.size()) {
                     return true;
                 }
